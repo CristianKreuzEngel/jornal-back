@@ -1,0 +1,6 @@
+Fazer build
+docker build -t jornal .
+
+
+Rodar container
+docker run -p 5432:5432 -d jornal

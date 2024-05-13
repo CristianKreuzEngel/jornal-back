@@ -1,0 +1,5 @@
+//Para gerar chave
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+
+//Para executar o comando acima
+openssl rsa -pubout -in private_key.pem -out public_key.pem

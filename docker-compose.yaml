@@ -1,0 +1,18 @@
+version: "3"
+services:
+  api-jornal:
+    image: jornal
+    container_name: jornal-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db-jornal
+  db-jornal:
+    image: jornal-db
+    container_name: jornal-db
+    environment:
+      ENV POSTGRESS_USER: admin
+      ENV POSTGRESS_PASSWORD: 123456
+      ENV POSTGRESS_DB: jornalDB
+    ports:
+      - "5432:5432"

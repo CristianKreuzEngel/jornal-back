@@ -1,0 +1,65 @@
+Passo a passo GIT
+<!-- Criar public key do git -->
+-Abrir cmd modo adm ou caso linux abrir o terminal
+Executar o seguinte comando:
+
+ssh-keygen -t rsa -b 4096 -C "seuemail@seuemail.com"
+
+Após criado buscar arquivo id_rsa.pub
+copiar chave e adicionar ela no github
+
+<!-- Como configurar usuário global -->
+Após criado a chave precisamos configurar o usuário global
+Para configurar execute os seguintes comandos:
+Primeiro configuramo o nome do usuário:
+
+git config --global user.name "Seu nome" (--replace-all *se necessário, pois com esse comando ele irá sobrescrever caso já tiver um usuário com mesmo nome)
+
+Segundo comando é para configurarmos o email
+
+git config --global user.email "Seu email"
+
+<!-- Como clonar projeto do git -->
+No terminal ou cmd, você entra na pasta onde deseja colocar
+os arquivos do projeto e executa o seguinte comando:
+
+git clone chavessh
+
+substitue o "chavessh" pela chave do projeto
+
+<!-- Como criar uma branch -->
+Para criar uma branch, dentro da pasta do projeto você 
+executa o seguinte comando:
+
+git checkout -b nomeDaBranch
+
+Substitue o nomeDaBranch pelo nome desejado vale ressaltar que
+não pode ter assento e nem caracter especial como por exemplo "ç"
+
+<!-- Como comitar -->
+Para comitar execute o seguinte comandos:
+
+Primeiro devemos preparar os arquivos, para isso devemos fazer o seguinte comando:
+
+git add .
+
+Após executar esse comando podemos executar
+
+git commit -m "Comentario do que foi feito"
+
+<!-- Como mandar os códigos comitados para a branch -->
+Para mandar os códigos comitados execute o seguinte comando:
+
+git push origin nomeDaBranch
+
+<!-- Como trazer os códigos de uma branch -->
+Para trazer os códigos de uma branch já criada no repositório
+executemos os seguintes comandos:
+
+Antes de executarmos, devemos criar a branch na nossa local:
+git checkout -b nomeDaBranch
+
+Após isso damos o seguinte comando:
+
+git pull origin nomeDaBranch
+
