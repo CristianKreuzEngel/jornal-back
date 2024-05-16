@@ -40,22 +40,22 @@ const getByCod = async (req, res) => {
     }
 }
 
-// const alterPass = async (req, res) => {
-//     try {
-//         if (req.body.pass == null) {
-//             return res.status(400).send('Senha não informada')
-//         }
-//         const resp = await userService.alterPass(req.body);
-//         res.status(204).send(resp)
+const alterPass = async (req, res) => {
+    try {
+        if (req.body.pass == null) {
+            return res.status(400).send('Senha não informada')
+        }
+        const resp = await userService.alterPass(req.body);
+        res.status(204).send(resp)
 
-//     } catch (error) {
-//         console.log(error)
-//         res.status(400).send(error)
-//     }
-// }
+    } catch (error) {
+        console.log(error)
+        res.status(400).send(error)
+    }
+}
 const deleteUser = async (req, res) =>{
     try{
-        if (req.body.pass == null) {
+        if (req.body.password == null) {
             return res.status(400).send('Senha não informada')
         }
         const resp = await userService.deleteUser(req.body);
@@ -70,5 +70,5 @@ module.exports.createUser = createUser;
 module.exports.getAllUsers = getAllUsers;
 module.exports.getByNickname = getByNickname;
 module.exports.getByCod = getByCod;
-// module.exports.alterPass = alterPass;
+module.exports.alterPass = alterPass;
 module.exports.deleteUser = deleteUser;

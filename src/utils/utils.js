@@ -11,7 +11,6 @@ function hashedPassword(pass, salt){
 function createUser (pass){
     const salt = generateSalt()
     const hashedPass = hashedPassword(pass, salt)
-    console.log({salt, hashedPass})
     return {salt, hashedPass}
 }
 
