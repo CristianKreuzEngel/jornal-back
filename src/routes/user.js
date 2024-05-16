@@ -5,6 +5,6 @@ module.exports = (app) => {
     app.get('/all-users', userController.getAllUsers)
     app.post('/get-nickname', userController.getByNickname)
     app.post('/get-cod', userController.getByCod)
-    app.patch('/alter-pass', userController.Alterpass)
+    // app.patch('/alter-pass', userController.Alterpass)
     app.delete('/delete-user', userController.deleteUser)
 }
