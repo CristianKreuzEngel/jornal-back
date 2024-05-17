@@ -42,7 +42,6 @@ const getByCod = async (req, res) => {
 
 const alterPass = async (req, res) => {
     try {
-        console.log(req.body)
         if (req.body.oldPass == null) {
             return res.status(400).send('Senha não informada')
         }

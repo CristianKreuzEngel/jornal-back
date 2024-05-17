@@ -29,20 +29,17 @@ const getByCod = async(params) =>{
 const sqlGetPass = `select usu_salt, usu_password from users where usu_cod = $1 `
 // PATCH
 const alterPass= async (params) => {
-    console.log(params)
     const resp = await db.query(sqlGetPass, [params.cod])
     if(resp == null){
         return ('usuário não encontrado')
     }
-    console.log(resp)
-    validPass = cript.comparePassword(resp.usu_password, resp.usu_salt, params.oldPass)
+    validPass = cript.comparePassword(resp.rows[0].usu_password, resp.rows[0].usu_salt, params.oldPass)
     if(validPass == false){
         return ('Senha incorreta, por favor verifique')
     }else{
         const sqlUpdate = `update users set usu_salt = $2, usu_password= $3
                                 where usu_cod = $1`
         const newPass = cript.createUser(params.newPass)
-        console.log(newPass)
         return await db.query(sqlUpdate, [params.cod, newPass.salt, newPass.hashedPass])
 
     }
