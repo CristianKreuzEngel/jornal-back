@@ -11,7 +11,7 @@ const createUser = async (params) =>{
 }
 
 // GET
-const sqlGetAll = `Select usu_cod, usu_name, usu_nickname, usu_email, usu_phone from users where usu_active = true`
+const sqlGetAll = `Select usu_id, usu_cod, usu_name, usu_nickname, usu_email, usu_phone from users where usu_active = true`
 const getAllUsers = async () =>{
     return await db.query(sqlGetAll)
 }

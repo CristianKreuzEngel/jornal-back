@@ -1,6 +1,6 @@
 CREATE TABLE users (
     usu_id SERIAL PRIMARY KEY,
-    usu_cod TEXT NOT NULL UNIQUE,
+    usu_cod INTEGER NOT NULL UNIQUE,
     usu_name TEXT NOT NULL,
     usu_nickname TEXT NOT NULL,
     usu_email TEXT NOT NULL UNIQUE,
@@ -14,9 +14,8 @@ CREATE TABLE followers (
     follow_follower_id INTEGER NOT NULL,
     follow_followed_id INTEGER NOT NULL,
     follow_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (follow_follower_id, follow_followed_id),
-    FOREIGN KEY (follow_follower_id) REFERENCES users(usu_id),
-    FOREIGN KEY (follow_followed_id) REFERENCES users(usu_id)
+    FOREIGN KEY (follow_follower_id) REFERENCES users(usu_cod),
+    FOREIGN KEY (follow_followed_id) REFERENCES users(usu_cod)
 );
 
 CREATE TABLE categories (
