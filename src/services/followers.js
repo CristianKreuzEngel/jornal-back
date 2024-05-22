@@ -7,15 +7,20 @@ const insertFollowersService = async (params) => {
 }
 
 const getFollowersService = async (params) => {
-    const sql = `select usu_nome from`
+    const sql = `select usu_cod, usu_name from followers 
+                 join users on users.usu_cod = followers.follow_follower_id
+                 where users.usu_cod = $1`
+    
+    return await db.query(sql, [params.cod])
 }
 
-
-
-
-
-
-
-
+const unFollowService = async(params) => {
+    const sql = `delete from followers
+                 where follow_follower_id = $1
+                 and follow_followed_id = $2`
+    return await db.query(sql, [params.follow, params.followed])
+}
 
 module.exports.insertFollowersService = insertFollowersService
+module.exports.getFollowersService = getFollowersService
+module.exports.unFollowService = unFollowService
