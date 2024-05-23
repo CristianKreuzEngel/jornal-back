@@ -9,7 +9,7 @@ const insertFollowersService = async (params) => {
 const getFollowersService = async (params) => {
     const sql = `select usu_cod, usu_name from followers 
                  join users on users.usu_cod = followers.follow_follower_id
-                 where users.usu_cod = $1`
+                 where followers.follow_followed_id = $1`
     
     return await db.query(sql, [params.cod])
 }

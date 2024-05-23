@@ -11,8 +11,8 @@ CREATE TABLE users (
 );
 
 CREATE TABLE followers (
-    follow_follower_id INTEGER NOT NULL,
-    follow_followed_id INTEGER NOT NULL,
+    follow_follower_id INTEGER NOT NULL, --Seguidor
+    follow_followed_id INTEGER NOT NULL, --Seguido
     follow_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (follow_follower_id) REFERENCES users(usu_cod),
     FOREIGN KEY (follow_followed_id) REFERENCES users(usu_cod)

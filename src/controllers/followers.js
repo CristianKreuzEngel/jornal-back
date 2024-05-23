@@ -22,7 +22,7 @@ const getFollowers = async(req, res) => {
 const unFollow = async(req, res) => {
     try{
         const resp = await followService.unFollowService(req.query)
-        res.status(200).send(resp.rows)
+        res.status(204).send(resp.rows)
     }catch(error){
         console.log(error)
         res.status(400).send(error)
