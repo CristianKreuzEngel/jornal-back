@@ -8,7 +8,7 @@ app.use(express.json());
 app.get('/', (req, res) =>{
     res.send('Hello world!')
 })
-
+require('./services/swagger')
 require('./routes')(app)
 
 app.listen(port, () =>{
