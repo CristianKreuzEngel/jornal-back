@@ -23,7 +23,7 @@ CREATE TABLE categories (
     cat_title TEXT NOT NULL,
     cat_description TEXT,
     cat_icon TEXT,
-    cat_prefix TEXT NOT NULL,
+    cat_prefix TEXT NOT NULL UNIQUE,
     cat_created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE posts (
