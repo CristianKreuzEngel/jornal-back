@@ -1,6 +1,6 @@
 const db = require('../configs/pg');
 
-const sqlGet = `Select cat_title, cat_description, cat_icon, cat_prefix from categories`
+const sqlGet = `Select cat_id, cat_title, cat_description, cat_icon, cat_prefix from categories`
 
 async function getAll(){
     const resp = await db.query(sqlGet)
