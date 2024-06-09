@@ -1,6 +1,6 @@
 const service = require('../services/categories');
 
-async function getAll(req, res) {
+const getAll = async (req, res) => {
     try{
         const resp = await service.getAll();
         if(resp.rows == null){
@@ -13,7 +13,7 @@ async function getAll(req, res) {
     }
 }
 
-async function createCategory(req, res){
+const createCategory = async (req, res) => {
     try{
         if(req.body == null){
             res.status(400).send({msg: 'Requisição nula, por favor verifique'})
@@ -27,7 +27,7 @@ async function createCategory(req, res){
     }
 }
 
-async function deleteCategory(req, res){
+const deleteCategory = async (req, res) => {
     try{
         if(req.body == null){
             res.status(400).send({msg: 'Requisição nula, por favor verifique'})
@@ -41,7 +41,7 @@ async function deleteCategory(req, res){
     }
 }
 
-async function updateCategory(req, res){
+const updateCategory = async (req, res) => {
     try{
         if(req.body == null){
             res.status(400).send({msg: 'Requisição nula, por favor verifique'})

@@ -25,16 +25,19 @@ async function updateTopicService(params){
     let fields = ''
     binds.push(params.id)
     let countParams = 1
+
     if(params.title){
         countParams++
         fields += (fields?',':'') + ` top_title = $${countParams}`
         binds.push(params.title)
     }
+
     if(params.category){
         countParams++
         fields += (fields?',':'') + ` top_category_id = $${countParams}`
         binds.push(params.category)
     }
+    
     const sql = sqlUpdate + fields + 'where top_id = $1'
     return await db.query(sql, binds)
 }

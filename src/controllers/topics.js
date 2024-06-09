@@ -1,6 +1,6 @@
 const service = require('../services/topics')
 
-async function getAll(req, res){
+const getAll = async (req, res) => {
     try{
         const resp = service.getAllService()
         if(resp.rows == null){
@@ -14,7 +14,7 @@ async function getAll(req, res){
     }
 }
 
-async function getByTitle(req, res){
+const getByTitle = async (req, res) => {
     try{
         const resp = service.getByTitleService(req.query)
         if(resp.rows == null){
@@ -28,7 +28,7 @@ async function getByTitle(req, res){
     }
 }
 
-async function updateTopic(req, res){
+const updateTopic = async (req, res) => {
     try{
         const resp = service.updateTopicService(req.body)
         if(resp.rows == null){
@@ -42,7 +42,7 @@ async function updateTopic(req, res){
     }
 }
 
-async function createTopic(req, res){
+const createTopic = async (req, res) => {
     try{
         const resp = service.createTopicService(req.body)
         if(resp == null){
@@ -56,7 +56,7 @@ async function createTopic(req, res){
     }
 }
 
-async function deleteTopic(req, res){
+const deleteTopic = async (req, res) => {
     try{
         const resp = service.deleteTopicService(req.body)
         if(resp == null){

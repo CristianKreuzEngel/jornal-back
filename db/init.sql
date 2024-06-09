@@ -77,6 +77,7 @@ CREATE TABLE tags (
     tag_name TEXT NOT NULL UNIQUE,
     tag_description TEXT
 );
+
 CREATE TABLE post_tags (
     post_id INTEGER NOT NULL,
     tag_id INTEGER NOT NULL,
@@ -84,6 +85,7 @@ CREATE TABLE post_tags (
     FOREIGN KEY (post_id) REFERENCES posts(post_id),
     FOREIGN KEY (tag_id) REFERENCES tags(tag_id)
 );
+
 CREATE TABLE topic_tags (
     topic_id INTEGER NOT NULL,
     tag_id INTEGER NOT NULL,

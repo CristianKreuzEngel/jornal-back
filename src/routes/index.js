@@ -10,8 +10,8 @@ module.exports = (app) => {
     user(app);
     followers(app);
     topics(app);
-    // posts(app);
-    // tags(app);
-    // comments(app);
+    posts(app);
+    tags(app);
+    comments(app);
     categories(app);
 }
