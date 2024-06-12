@@ -5,6 +5,7 @@ const posts = require('./posts')
 const tags = require('./tags')
 const comments = require('./comments')
 const categories = require('./categories')
+const login = require('./login')
 
 module.exports = (app) => {
     user(app);
@@ -14,4 +15,5 @@ module.exports = (app) => {
     tags(app);
     comments(app);
     categories(app);
+    login(app);
 }

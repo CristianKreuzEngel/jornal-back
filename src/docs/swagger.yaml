@@ -10,6 +10,12 @@
   "schemes": [
     "http"
   ],
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic",
+      "description": "Autenticação básica"
+    }
+  },
   "consumes": [
     "application/json"
   ],
@@ -24,6 +30,9 @@
           "201": {
             "description": "Criado"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -37,6 +46,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -49,6 +61,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -72,6 +87,9 @@
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           }
         }
       }
@@ -99,6 +117,9 @@
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           }
         }
       }
@@ -126,6 +147,9 @@
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           }
         }
       }
@@ -139,6 +163,9 @@
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           }
         }
       }
@@ -149,6 +176,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -165,6 +195,9 @@
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           }
         }
       }
@@ -175,6 +208,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -192,6 +228,9 @@
           "400": {
             "description": "Solicitação Inválida"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -207,6 +246,9 @@
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -224,6 +266,9 @@
           "400": {
             "description": "Solicitação Inválida"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -232,10 +277,27 @@
     },
     "/posts": {
       "get": {
-        "description": "",
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Retorna todos os posts",
+        "description": "Retorna uma lista de todos os posts",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Uma lista de posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -243,10 +305,68 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Cria um novo post",
+        "description": "Cria um novo post com os dados fornecidos",
+        "parameters": [
+          {
+            "name": "json",
+            "in": "body",
+            "description": "Dados para criar um novo post",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Título do Post"
+                },
+                "subtitle": {
+                  "type": "string",
+                  "example": "Subtítulo do Post"
+                },
+                "content": {
+                  "type": "string",
+                  "example": "Conteúdo do post."
+                },
+                "author": {
+                  "type": "number",
+                  "example": 1
+                },
+                "anexo": {
+                  "type": "string",
+                  "example": "url_do_anexo"
+                },
+                "category": {
+                  "type": "number",
+                  "example": 1
+                },
+                "topic": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
-            "description": "Criado"
+            "description": "Post criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -256,10 +376,36 @@
     },
     "/posts/search": {
       "get": {
-        "description": "",
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Retorna um post por ID",
+        "description": "Retorna um post específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID do post",
+            "required": true,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Um post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Post não encontrado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -269,18 +415,145 @@
     },
     "/posts/edit-post/{id}": {
       "patch": {
-        "description": "",
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Edita um post existente",
+        "description": "Edita os dados de um post existente pelo ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "ID do post"
+          },
+          {
+            "name": "json",
+            "in": "body",
+            "description": "Dados para editar o post",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "subtitle": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "content": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "anexo": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "category": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "integer"
+                        }
+                      }
+                    },
+                    "topic": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "example": "Título do Post Editado"
+                    },
+                    "subtitle": {
+                      "type": "string",
+                      "example": "Subtítulo do Post Editado"
+                    },
+                    "content": {
+                      "type": "string",
+                      "example": "Conteúdo do post editado."
+                    },
+                    "anexo": {
+                      "type": "string",
+                      "example": "url_do_anexo_editado"
+                    },
+                    "category": {
+                      "type": "number",
+                      "example": 2
+                    },
+                    "topic": {
+                      "type": "number",
+                      "example": 2
+                    }
+                  }
+                }
+              }
+            }
           }
         ],
         "responses": {
+          "200": {
+            "description": "Post editado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
           "201": {
             "description": "Criado"
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Post não encontrado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -290,18 +563,111 @@
     },
     "/posts/delete/{id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Deleta um post",
+        "description": "Deleta um post existente pelo ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "ID do post"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post deletado com sucesso"
+          },
+          "201": {
+            "description": "Criado"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Post não encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Realiza login",
+        "description": "Rota de login que utiliza autenticação básica",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Cabeçalho de autenticação Basic",
+            "example": "Basic dXNlcm5hbWU6cGFzc3dvcmQ="
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string",
+                  "example": "matheus@teste.com"
+                },
+                "pass": {
+                  "type": "string",
+                  "example": "coxinha123"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "Criado"
+            "description": "Login realizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "usuario": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitação Inválida"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -309,5 +675,10 @@
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
 }
